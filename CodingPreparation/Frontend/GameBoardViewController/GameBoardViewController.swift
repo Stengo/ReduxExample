@@ -3,10 +3,16 @@ import UIKit
 class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
     lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.textAlignment = .center
         textView.font = .systemFont(ofSize: 24)
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
+    }()
+
+    lazy var loadingIndicator: UIActivityIndicatorView = {
+        let loadingIndicator = UIActivityIndicatorView()
+        loadingIndicator.startAnimating()
+        loadingIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return loadingIndicator
     }()
 
     override func viewDidLoad() {
@@ -14,6 +20,7 @@ class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
 
         view.backgroundColor = .white
         view.addSubview(textView)
+        view.addSubview(loadingIndicator)
         configureConstraints()
     }
 
@@ -27,6 +34,18 @@ class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
     }
 
     override func update(with viewData: GameBoardViewData) {
-        textView.text = viewData.text
+        switch viewData {
+        case .failure:
+            loadingIndicator.isHidden = true
+            textView.isHidden = false
+            textView.text = "Something went wrong"
+        case .loading:
+            loadingIndicator.isHidden = false
+            textView.isHidden = true
+        case let .success(text):
+            loadingIndicator.isHidden = true
+            textView.isHidden = false
+            textView.text = text
+        }
     }
 }
