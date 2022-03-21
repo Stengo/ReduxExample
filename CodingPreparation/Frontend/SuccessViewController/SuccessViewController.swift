@@ -9,11 +9,21 @@ class SuccessViewController: SubscriberViewController<SuccessViewData> {
         return label
     }()
 
+    lazy var restartButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = .systemFont(ofSize: 24, weight: .medium)
+        button.setTitleColor(.gray, for: .normal)
+        button.addTarget(self, action: #selector(didSelectRestart), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view?.backgroundColor = .white
         view.addSubview(label)
+        view.addSubview(restartButton)
         configureConstraints()
     }
 
@@ -21,12 +31,23 @@ class SuccessViewController: SubscriberViewController<SuccessViewData> {
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            label.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+
+            restartButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            restartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            restartButton.topAnchor.constraint(equalTo: label.bottomAnchor),
         ])
     }
 
     override func update(with viewData: SuccessViewData) {
         label.text = viewData.text
+        restartButton.setTitle(viewData.restart, for: .normal)
+    }
+
+    @objc private func didSelectRestart() {
+        store.dispatch(StartingWordAction.restart)
+        dismiss(animated: true, completion: nil)
     }
 }
+
+

@@ -9,8 +9,10 @@ struct SuccessViewData: ViewDataType {
     }
 
     let text: String
+    let restart: String
 
     init(for fragment: StateFragment) {
         text = "You did it!"
+        restart = "restart"
     }
 }

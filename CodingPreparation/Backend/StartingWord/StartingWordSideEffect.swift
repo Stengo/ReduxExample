@@ -1,9 +1,10 @@
 import Foundation
+import ReSwift
 
 func startingWordSideEffect() -> SideEffect {
     return { action, dispatch, getState in
         switch action {
-        case AppDelegateAction.didFinishLaunching:
+        case AppDelegateAction.didFinishLaunching, StartingWordAction.restart:
             guard
                 let startingWordsPath = Bundle.main.path(forResource: "starting_words", ofType: "txt"),
                 let startingWordsString = try? String(contentsOfFile: startingWordsPath)
@@ -18,4 +19,8 @@ func startingWordSideEffect() -> SideEffect {
             return
         }
     }
+}
+
+enum StartingWordAction: Action {
+    case restart
 }
