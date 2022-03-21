@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
     lazy var textView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .center
@@ -15,8 +15,6 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(textView)
         configureConstraints()
-
-        textView.text = "some text"
     }
 
     private func configureConstraints() {
@@ -26,5 +24,9 @@ class ViewController: UIViewController {
             textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             textView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+
+    override func update(with viewData: GameBoardViewData) {
+        textView.text = viewData.text
     }
 }
