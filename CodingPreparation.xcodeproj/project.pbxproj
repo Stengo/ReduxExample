@@ -24,6 +24,8 @@
 		B809EB8227E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8127E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift */; };
 		B809EB8427E876E200E0F937 /* DictionaryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8327E876E200E0F937 /* DictionaryClient.swift */; };
 		B809EB8627E87BE300E0F937 /* DictionaryDefinitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */; };
+		B809EB8B27E8973700E0F937 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8A27E8973700E0F937 /* SuccessViewController.swift */; };
+		B809EB8D27E8974200E0F937 /* SuccessViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8C27E8974200E0F937 /* SuccessViewData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		B809EB8127E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDefinitionSideEffect.swift; sourceTree = "<group>"; };
 		B809EB8327E876E200E0F937 /* DictionaryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryClient.swift; sourceTree = "<group>"; };
 		B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDefinitionState.swift; sourceTree = "<group>"; };
+		B809EB8A27E8973700E0F937 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		B809EB8C27E8974200E0F937 /* SuccessViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 		B809EB6127E86A4000E0F937 /* Frontend */ = {
 			isa = PBXGroup;
 			children = (
+				B809EB8927E8972600E0F937 /* SuccessViewController */,
 				B809EB7B27E8747A00E0F937 /* GameBoardViewController */,
 			);
 			path = Frontend;
@@ -145,6 +150,15 @@
 				B809EB8327E876E200E0F937 /* DictionaryClient.swift */,
 			);
 			path = DictionaryDefinition;
+			sourceTree = "<group>";
+		};
+		B809EB8927E8972600E0F937 /* SuccessViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B809EB8A27E8973700E0F937 /* SuccessViewController.swift */,
+				B809EB8C27E8974200E0F937 /* SuccessViewData.swift */,
+			);
+			path = SuccessViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +246,8 @@
 				B809EB4B27E8646B00E0F937 /* AppDelegate.swift in Sources */,
 				B809EB8627E87BE300E0F937 /* DictionaryDefinitionState.swift in Sources */,
 				B809EB7027E86DCE00E0F937 /* SideEffects.swift in Sources */,
+				B809EB8B27E8973700E0F937 /* SuccessViewController.swift in Sources */,
+				B809EB8D27E8974200E0F937 /* SuccessViewData.swift in Sources */,
 				B809EB7D27E874A800E0F937 /* GameBoardViewController.swift in Sources */,
 				B809EB4D27E8646B00E0F937 /* SceneDelegate.swift in Sources */,
 				B809EB7827E86FEC00E0F937 /* WordSelectionState.swift in Sources */,
