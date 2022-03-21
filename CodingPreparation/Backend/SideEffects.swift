@@ -4,6 +4,7 @@ typealias SideEffect = (Action, @escaping DispatchFunction, @escaping () -> AppS
 
 private let sideEffects: [SideEffect] = [
     startingWordSideEffect(),
+    dictionaryDefinitionSideEffect(),
 ]
 
 let sideEffectsMiddleware: Middleware<AppState> = { dispatch, getState in

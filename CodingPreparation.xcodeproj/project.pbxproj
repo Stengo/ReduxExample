@@ -21,6 +21,9 @@
 		B809EB7A27E873E900E0F937 /* SubscriberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB7927E873E900E0F937 /* SubscriberViewController.swift */; };
 		B809EB7D27E874A800E0F937 /* GameBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB7C27E874A800E0F937 /* GameBoardViewController.swift */; };
 		B809EB7F27E874B700E0F937 /* GameBoardViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB7E27E874B700E0F937 /* GameBoardViewData.swift */; };
+		B809EB8227E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8127E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift */; };
+		B809EB8427E876E200E0F937 /* DictionaryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8327E876E200E0F937 /* DictionaryClient.swift */; };
+		B809EB8627E87BE300E0F937 /* DictionaryDefinitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		B809EB7927E873E900E0F937 /* SubscriberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewController.swift; sourceTree = "<group>"; };
 		B809EB7C27E874A800E0F937 /* GameBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardViewController.swift; sourceTree = "<group>"; };
 		B809EB7E27E874B700E0F937 /* GameBoardViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardViewData.swift; sourceTree = "<group>"; };
+		B809EB8127E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDefinitionSideEffect.swift; sourceTree = "<group>"; };
+		B809EB8327E876E200E0F937 /* DictionaryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryClient.swift; sourceTree = "<group>"; };
+		B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDefinitionState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 				B809EB6927E86B6A00E0F937 /* Store.swift */,
 				B809EB6F27E86DCE00E0F937 /* SideEffects.swift */,
 				B809EB6B27E86B7400E0F937 /* AppState.swift */,
+				B809EB8027E8763F00E0F937 /* DictionaryDefinition */,
 				B809EB7627E86FDC00E0F937 /* WordSelection */,
 				B809EB7127E86E2D00E0F937 /* StartingWord */,
 			);
@@ -128,6 +135,16 @@
 				B809EB7E27E874B700E0F937 /* GameBoardViewData.swift */,
 			);
 			path = GameBoardViewController;
+			sourceTree = "<group>";
+		};
+		B809EB8027E8763F00E0F937 /* DictionaryDefinition */ = {
+			isa = PBXGroup;
+			children = (
+				B809EB8127E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift */,
+				B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */,
+				B809EB8327E876E200E0F937 /* DictionaryClient.swift */,
+			);
+			path = DictionaryDefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,13 +226,16 @@
 			files = (
 				B809EB7A27E873E900E0F937 /* SubscriberViewController.swift in Sources */,
 				B809EB6C27E86B7400E0F937 /* AppState.swift in Sources */,
+				B809EB8227E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift in Sources */,
 				B809EB7F27E874B700E0F937 /* GameBoardViewData.swift in Sources */,
 				B809EB7527E86E4A00E0F937 /* StartingWordSideEffect.swift in Sources */,
 				B809EB4B27E8646B00E0F937 /* AppDelegate.swift in Sources */,
+				B809EB8627E87BE300E0F937 /* DictionaryDefinitionState.swift in Sources */,
 				B809EB7027E86DCE00E0F937 /* SideEffects.swift in Sources */,
 				B809EB7D27E874A800E0F937 /* GameBoardViewController.swift in Sources */,
 				B809EB4D27E8646B00E0F937 /* SceneDelegate.swift in Sources */,
 				B809EB7827E86FEC00E0F937 /* WordSelectionState.swift in Sources */,
+				B809EB8427E876E200E0F937 /* DictionaryClient.swift in Sources */,
 				B809EB6A27E86B6A00E0F937 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
