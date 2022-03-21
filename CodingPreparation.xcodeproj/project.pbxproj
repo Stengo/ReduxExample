@@ -19,6 +19,7 @@
 		B809EB7327E86E4000E0F937 /* starting_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = B809EB7227E86E4000E0F937 /* starting_words.txt */; };
 		B809EB7527E86E4A00E0F937 /* StartingWordSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB7427E86E4A00E0F937 /* StartingWordSideEffect.swift */; };
 		B809EB7827E86FEC00E0F937 /* WordSelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB7727E86FEC00E0F937 /* WordSelectionState.swift */; };
+		B809EB7A27E873E900E0F937 /* SubscriberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB7927E873E900E0F937 /* SubscriberViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		B809EB7227E86E4000E0F937 /* starting_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = starting_words.txt; sourceTree = "<group>"; };
 		B809EB7427E86E4A00E0F937 /* StartingWordSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingWordSideEffect.swift; sourceTree = "<group>"; };
 		B809EB7727E86FEC00E0F937 /* WordSelectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordSelectionState.swift; sourceTree = "<group>"; };
+		B809EB7927E873E900E0F937 /* SubscriberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				B809EB4A27E8646B00E0F937 /* AppDelegate.swift */,
 				B809EB4C27E8646B00E0F937 /* SceneDelegate.swift */,
+				B809EB7927E873E900E0F937 /* SubscriberViewController.swift */,
 				B809EB6227E86A4900E0F937 /* Backend */,
 				B809EB6127E86A4000E0F937 /* Frontend */,
 				B809EB5327E8647400E0F937 /* Assets.xcassets */,
@@ -193,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B809EB7A27E873E900E0F937 /* SubscriberViewController.swift in Sources */,
 				B809EB6427E86A5E00E0F937 /* ViewController.swift in Sources */,
 				B809EB6C27E86B7400E0F937 /* AppState.swift in Sources */,
 				B809EB7527E86E4A00E0F937 /* StartingWordSideEffect.swift in Sources */,
