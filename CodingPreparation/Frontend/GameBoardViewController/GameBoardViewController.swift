@@ -18,6 +18,9 @@ class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOnTextView))
+        textView.addGestureRecognizer(tapGesture)
+
         view.backgroundColor = .white
         view.addSubview(textView)
         view.addSubview(loadingIndicator)
@@ -50,5 +53,21 @@ class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
             textView.isHidden = false
             textView.text = text
         }
+    }
+
+    @objc private func didTapOnTextView(_ tapGestureRecognizer: UITapGestureRecognizer) {
+        let point = tapGestureRecognizer.location(in: textView)
+        guard
+            let textPosition = textView.closestPosition(to: point),
+            let selectedRange = textView.tokenizer.rangeEnclosingPosition(
+                textPosition,
+                with: .word,
+                inDirection: UITextDirection.layout(.right)
+            ),
+            let selectedWord = textView.text(in: selectedRange)
+        else {
+            return
+        }
+        store.dispatch(WordSelectionAction.select(selectedWord))
     }
 }
