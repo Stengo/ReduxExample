@@ -15,6 +15,7 @@
 		B809EB6427E86A5E00E0F937 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6327E86A5E00E0F937 /* ViewController.swift */; };
 		B809EB6A27E86B6A00E0F937 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6927E86B6A00E0F937 /* Store.swift */; };
 		B809EB6C27E86B7400E0F937 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6B27E86B7400E0F937 /* AppState.swift */; };
+		B809EB7027E86DCE00E0F937 /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6F27E86DCE00E0F937 /* SideEffects.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		B809EB6327E86A5E00E0F937 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B809EB6927E86B6A00E0F937 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		B809EB6B27E86B7400E0F937 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B809EB6F27E86DCE00E0F937 /* SideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffects.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				B809EB6927E86B6A00E0F937 /* Store.swift */,
+				B809EB6F27E86DCE00E0F937 /* SideEffects.swift */,
 				B809EB6B27E86B7400E0F937 /* AppState.swift */,
 			);
 			path = Backend;
@@ -167,6 +170,7 @@
 				B809EB6427E86A5E00E0F937 /* ViewController.swift in Sources */,
 				B809EB6C27E86B7400E0F937 /* AppState.swift in Sources */,
 				B809EB4B27E8646B00E0F937 /* AppDelegate.swift in Sources */,
+				B809EB7027E86DCE00E0F937 /* SideEffects.swift in Sources */,
 				B809EB4D27E8646B00E0F937 /* SceneDelegate.swift in Sources */,
 				B809EB6A27E86B6A00E0F937 /* Store.swift in Sources */,
 			);
