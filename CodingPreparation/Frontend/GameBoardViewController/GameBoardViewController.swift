@@ -69,9 +69,5 @@ class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
             return
         }
         store.dispatch(WordSelectionAction.select(selectedWord))
-
-        if selectedWord.lowercased() == "success" {
-            present(SuccessViewController(), animated: true, completion: nil)
-        }
     }
 }

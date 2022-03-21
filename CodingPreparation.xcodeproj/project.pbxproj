@@ -26,6 +26,7 @@
 		B809EB8627E87BE300E0F937 /* DictionaryDefinitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */; };
 		B809EB8B27E8973700E0F937 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8A27E8973700E0F937 /* SuccessViewController.swift */; };
 		B809EB8D27E8974200E0F937 /* SuccessViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8C27E8974200E0F937 /* SuccessViewData.swift */; };
+		B809EB8F27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8E27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		B809EB8527E87BE300E0F937 /* DictionaryDefinitionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDefinitionState.swift; sourceTree = "<group>"; };
 		B809EB8A27E8973700E0F937 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		B809EB8C27E8974200E0F937 /* SuccessViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewData.swift; sourceTree = "<group>"; };
+		B809EB8E27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresentationSideEffect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				B809EB4A27E8646B00E0F937 /* AppDelegate.swift */,
 				B809EB4C27E8646B00E0F937 /* SceneDelegate.swift */,
 				B809EB7927E873E900E0F937 /* SubscriberViewController.swift */,
+				B809EB8E27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift */,
 				B809EB6227E86A4900E0F937 /* Backend */,
 				B809EB6127E86A4000E0F937 /* Frontend */,
 				B809EB5327E8647400E0F937 /* Assets.xcassets */,
@@ -240,6 +243,7 @@
 			files = (
 				B809EB7A27E873E900E0F937 /* SubscriberViewController.swift in Sources */,
 				B809EB6C27E86B7400E0F937 /* AppState.swift in Sources */,
+				B809EB8F27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift in Sources */,
 				B809EB8227E8765C00E0F937 /* DictionaryDefinitionSideEffect.swift in Sources */,
 				B809EB7F27E874B700E0F937 /* GameBoardViewData.swift in Sources */,
 				B809EB7527E86E4A00E0F937 /* StartingWordSideEffect.swift in Sources */,
