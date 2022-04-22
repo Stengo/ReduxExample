@@ -137,7 +137,7 @@ class ApplicationSubscriber: StateSubscriber {
     func new(fragment: Fragment<State>) {
         print(fragment.inner.description)
         print(fragment.isTheCase)
-        print("has change: \(fragment.containsChanges(for: \.isTheCase))")
+        print("contains change for isTheCase: \(fragment.containsChanges(for: \.isTheCase))")
     }
 
     func changeStuff() {
