@@ -27,6 +27,7 @@
 		B809EB8B27E8973700E0F937 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8A27E8973700E0F937 /* SuccessViewController.swift */; };
 		B809EB8D27E8974200E0F937 /* SuccessViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8C27E8974200E0F937 /* SuccessViewData.swift */; };
 		B809EB8F27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB8E27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift */; };
+		B8B47F352812932F00BCC03F /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B47F342812932F00BCC03F /* Experiment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		B809EB8A27E8973700E0F937 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		B809EB8C27E8974200E0F937 /* SuccessViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewData.swift; sourceTree = "<group>"; };
 		B809EB8E27E8993A00E0F937 /* ViewControllerPresentationSideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresentationSideEffect.swift; sourceTree = "<group>"; };
+		B8B47F342812932F00BCC03F /* Experiment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		B809EB6227E86A4900E0F937 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				B8B47F342812932F00BCC03F /* Experiment.swift */,
 				B809EB6927E86B6A00E0F937 /* Store.swift */,
 				B809EB6F27E86DCE00E0F937 /* SideEffects.swift */,
 				B809EB6B27E86B7400E0F937 /* AppState.swift */,
@@ -253,6 +256,7 @@
 				B809EB8B27E8973700E0F937 /* SuccessViewController.swift in Sources */,
 				B809EB8D27E8974200E0F937 /* SuccessViewData.swift in Sources */,
 				B809EB7D27E874A800E0F937 /* GameBoardViewController.swift in Sources */,
+				B8B47F352812932F00BCC03F /* Experiment.swift in Sources */,
 				B809EB4D27E8646B00E0F937 /* SceneDelegate.swift in Sources */,
 				B809EB7827E86FEC00E0F937 /* WordSelectionState.swift in Sources */,
 				B809EB8427E876E200E0F937 /* DictionaryClient.swift in Sources */,
