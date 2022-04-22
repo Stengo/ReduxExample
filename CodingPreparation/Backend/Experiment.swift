@@ -38,9 +38,9 @@ class StateContainer<State: Hashable> {
 
     func subscribe<Subscriber: StateSubscriber>(
         _ subscriber: Subscriber,
-        fractions: [Fraction<State>]
+        selections: [Selection<State>]
     ) where Subscriber.State == State {
-        let selector = fractions.map(\.keyPath)
+        let selector = selections.map(\.keyPath)
         subscriptions.append((subscriber, selector))
         subscriber.new(fragment: Fragment<State>(value: state, previousValue: state, selector: selector))
     }
@@ -53,11 +53,11 @@ class StateContainer<State: Hashable> {
 }
 
 prefix operator *
-prefix func * <State, T: Hashable>(_ keyPath: KeyPath<State, T>) -> Fraction<State> {
-    Fraction(keyPath: keyPath)
+prefix func * <State, T: Hashable>(_ keyPath: KeyPath<State, T>) -> Selection<State> {
+    Selection(keyPath: keyPath)
 }
 
-struct Fraction<State> {
+struct Selection<State> {
     fileprivate let keyPath: PartialKeyPath<State>
 }
 
@@ -132,7 +132,7 @@ class ApplicationSubscriber: StateSubscriber {
     init() {
         stateContainer.subscribe(
             self,
-            fractions: [
+            selections: [
                 *\.inner,
                 *\.name,
             ]
