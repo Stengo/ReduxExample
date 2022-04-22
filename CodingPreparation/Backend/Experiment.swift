@@ -52,12 +52,13 @@ class StateContainer<State: Hashable> {
     }
 }
 
+prefix operator *
+prefix func * <State, T: Hashable>(_ keyPath: KeyPath<State, T>) -> Fraction<State> {
+    Fraction(keyPath: keyPath)
+}
+
 struct Fraction<State> {
     fileprivate let keyPath: PartialKeyPath<State>
-
-    init<T: Hashable>(_ keyPath: KeyPath<State, T>) {
-        self.keyPath = keyPath
-    }
 }
 
 
@@ -145,8 +146,8 @@ class ApplicationSubscriber: StateSubscriber {
         stateContainer.subscribe(
             self,
             fractions: [
-                Fraction(\.inner),
-                Fraction(\.name),
+                *\.inner,
+                *\.name,
             ]
         )
         changeStuff()
