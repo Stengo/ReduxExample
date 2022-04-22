@@ -88,10 +88,11 @@ struct Fragment<State>: Equatable {
     }
 
     subscript<T>(dynamicMember keyPath: KeyPath<State, T>) -> T {
-        if selector.contains(keyPath) == false {
+        let member = value[keyPath: keyPath]
+        if selector.contains(keyPath) == false, member is AnyHashable {
             print("WARNING: Accessing property that is not part of your observed values. You could be missing updates.")
         }
-        return value[keyPath: keyPath]
+        return member
     }
 
     static func == (lhs: Fragment<State>, rhs: Fragment<State>) -> Bool {
@@ -118,9 +119,21 @@ struct ApplicationState: Equatable, Hashable {
     var number: Int
     var isTheCase: Bool
     var inner: InnerStruct
+    var nonHashable: NonHashable
 
     struct InnerStruct: Equatable, Hashable {
         var description: String
+    }
+
+    struct NonHashable: Equatable {
+        var bla: String
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+        hasher.combine(number)
+        hasher.combine(isTheCase)
+        hasher.combine(inner)
     }
 }
 
@@ -129,7 +142,8 @@ let stateContainer = StateContainer(
         name: "Initial Name",
         number: 1,
         isTheCase: true,
-        inner: ApplicationState.InnerStruct(description: "Initial description")
+        inner: ApplicationState.InnerStruct(description: "Initial description"),
+        nonHashable: ApplicationState.NonHashable(bla: "What")
     )
 )
 
@@ -151,6 +165,7 @@ class ApplicationSubscriber: StateSubscriber {
         // easy way to check what changed
         print(fragment.inner.description)
         print(fragment.isTheCase)
+        print(fragment.nonHashable.bla)
     }
 
     func changeStuff() {
