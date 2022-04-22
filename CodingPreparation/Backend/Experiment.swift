@@ -8,16 +8,11 @@ protocol StateSubscriber: TypeErasedStateSubscriber {
 
 protocol TypeErasedStateSubscriber: AnyObject {
     func _new(fragment: Any)
-    func _areEqual(_ lhs: Any, _ rhs: Any) -> Bool
 }
 
 extension StateSubscriber {
     func _new(fragment: Any) {
         new(fragment: fragment as! Fragment<State>)
-    }
-
-    func _areEqual(_ lhs: Any, _ rhs: Any) -> Bool {
-        return lhs as! Fragment<State> == rhs as! Fragment<State>
     }
 }
 
@@ -33,12 +28,11 @@ class StateContainer<State: Hashable> {
         let previousState = state
         mutationClosure(&state)
         subscriptions.forEach { subscription in
-            let previousFragment = Fragment<State>(value: previousState, selector: subscription.selector)
-            let newFragment = Fragment<State>(value: state, selector: subscription.selector)
-            guard subscription.subscriber._areEqual(newFragment, previousFragment) == false else {
+            let fragment = Fragment<State>(value: state, previousValue: previousState, selector: subscription.selector)
+            guard fragment.containsChanges() else {
                 return
             }
-            subscription.subscriber._new(fragment: newFragment)
+            subscription.subscriber._new(fragment: fragment)
         }
     }
 
@@ -47,7 +41,7 @@ class StateContainer<State: Hashable> {
         selector: Selector<State>
     ) where Subscriber.State == State {
         subscriptions.append((subscriber, selector))
-        subscriber.new(fragment: Fragment<State>(value: state, selector: selector))
+        subscriber.new(fragment: Fragment<State>(value: state, previousValue: state, selector: selector))
     }
 
     func unsubscribe<Subscriber: StateSubscriber>(_ subscriber: Subscriber) {
@@ -78,12 +72,14 @@ struct Selector<State>: Equatable {
 }
 
 @dynamicMemberLookup
-struct Fragment<State>: Equatable {
+struct Fragment<State> {
     private let value: State
+    private let previousValue: State
     private let selector: Selector<State>
 
-    init(value: State, selector: Selector<State>) {
+    init(value: State, previousValue: State, selector: Selector<State>) {
         self.value = value
+        self.previousValue = previousValue
         self.selector = selector
     }
 
@@ -95,18 +91,23 @@ struct Fragment<State>: Equatable {
         return member
     }
 
-    static func == (lhs: Fragment<State>, rhs: Fragment<State>) -> Bool {
-        guard lhs.selector == rhs.selector else {
-            return false
-        }
-        for keyPath in lhs.selector.keyPaths {
-            let lhsValue = lhs.value[keyPath: keyPath] as! AnyHashable
-            let rhsValue = rhs.value[keyPath: keyPath] as! AnyHashable
+    func containsChanges<T: Equatable>(for keyPath: KeyPath<State, T>) -> Bool {
+        value[keyPath: keyPath] != previousValue[keyPath: keyPath]
+    }
+
+    func previousValue<T>(of keyPath: KeyPath<State, T>) -> T {
+        previousValue[keyPath: keyPath]
+    }
+
+    fileprivate func containsChanges() -> Bool {
+        for keyPath in selector.keyPaths {
+            let lhsValue = previousValue[keyPath: keyPath] as! AnyHashable
+            let rhsValue = value[keyPath: keyPath] as! AnyHashable
             guard lhsValue == rhsValue else {
-                return false
+                return true
             }
         }
-        return true
+        return false
     }
 
     private static func areEqual<T: Equatable>(lhs: T, rhs: T) -> Bool {
@@ -161,10 +162,10 @@ class ApplicationSubscriber: StateSubscriber {
     }
 
     func new(fragment: Fragment<State>) {
-        // previous + new fragment
-        // easy way to check what changed
         print(fragment.inner.description)
         print(fragment.isTheCase)
+        print("was \(fragment.previousValue(of: \.isTheCase))")
+        print("has change: \(fragment.containsChanges(for: \.isTheCase))")
         print(fragment.nonHashable.bla)
     }
 
