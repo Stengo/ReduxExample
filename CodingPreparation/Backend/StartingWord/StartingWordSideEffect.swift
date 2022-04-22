@@ -1,10 +1,13 @@
 import Foundation
-import ReSwift
 
 func startingWordSideEffect() -> SideEffect {
-    return { action, dispatch, getState in
-        switch action {
-        case AppDelegateAction.didFinishLaunching, StartingWordAction.restart:
+    return SideEffect {[
+        *\.wordSelection
+    ]} newFragmentCallback: { fragment in
+        if
+            fragment.containsChanges(for: \.wordSelection),
+            fragment.wordSelection == .starting
+        {
             guard
                 let startingWordsPath = Bundle.main.path(forResource: "starting_words", ofType: "txt"),
                 let startingWordsString = try? String(contentsOfFile: startingWordsPath)
@@ -13,14 +16,13 @@ func startingWordSideEffect() -> SideEffect {
             }
             let startingWords = startingWordsString.components(separatedBy: .whitespaces)
             let startingWord = startingWords.randomElement()!
-            dispatch(WordSelectionAction.select(startingWord))
-
-        default:
-            return
+            stateContainer.mutate { appState in
+                appState.wordSelection = .selected(startingWord)
+            }
         }
     }
 }
 
-enum StartingWordAction: Action {
-    case restart
+func restartGame(_ appState: inout AppState) {
+    appState.wordSelection = .starting
 }

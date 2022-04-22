@@ -1,8 +1,7 @@
-import ReSwift
 
-struct AppState: Equatable {
-    let wordSelection: WordSelectionState
-    let dictionaryDefinition: DictionaryDefinitionState
+struct AppState: Hashable {
+    var wordSelection: WordSelectionState
+    var dictionaryDefinition: DictionaryDefinitionState
 
     static var initial: AppState {
         return AppState(
@@ -10,13 +9,4 @@ struct AppState: Equatable {
             dictionaryDefinition: .initial
         )
     }
-}
-
-func appReducer(action: Action, state: AppState?) -> AppState {
-    let state = state ?? .initial
-
-    return AppState(
-        wordSelection: wordSelectionReducer(action: action, state: state.wordSelection),
-        dictionaryDefinition: dictionaryDefinitionReducer(action: action, state: state.dictionaryDefinition)
-    )
 }

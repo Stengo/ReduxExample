@@ -42,7 +42,7 @@ class StateContainer<State: Hashable> {
     ) where Subscriber.State == State {
         let selector = selections().map(\.keyPath)
         subscriptions.append((subscriber, selector))
-        subscriber.new(fragment: Fragment<State>(value: state, previousValue: state, selector: selector))
+        subscriber.new(fragment: Fragment<State>(value: state, previousValue: nil, selector: selector))
     }
 
     func unsubscribe<Subscriber: StateSubscriber>(_ subscriber: Subscriber) {
@@ -65,10 +65,10 @@ struct Selection<State> {
 @dynamicMemberLookup
 struct Fragment<State> {
     private let value: State
-    private let previousValue: State
+    private let previousValue: State?
     private let selector: [PartialKeyPath<State>]
 
-    init(value: State, previousValue: State, selector: [PartialKeyPath<State>]) {
+    init(value: State, previousValue: State?, selector: [PartialKeyPath<State>]) {
         self.value = value
         self.previousValue = previousValue
         self.selector = selector
@@ -83,16 +83,16 @@ struct Fragment<State> {
     }
 
     func containsChanges<T: Equatable>(for keyPath: KeyPath<State, T>) -> Bool {
-        value[keyPath: keyPath] != previousValue[keyPath: keyPath]
+        value[keyPath: keyPath] != previousValue?[keyPath: keyPath]
     }
 
-    func previousValue<T>(of keyPath: KeyPath<State, T>) -> T {
-        previousValue[keyPath: keyPath]
+    func previousValue<T>(of keyPath: KeyPath<State, T>) -> T? {
+        previousValue?[keyPath: keyPath]
     }
 
     fileprivate func containsChanges() -> Bool {
         for keyPath in selector {
-            let lhsValue = previousValue[keyPath: keyPath] as! AnyHashable
+            let lhsValue = previousValue?[keyPath: keyPath] as? AnyHashable
             let rhsValue = value[keyPath: keyPath] as! AnyHashable
             guard lhsValue == rhsValue else {
                 return true

@@ -1,28 +1,23 @@
-import ReSwift
 import UIKit
 
-class SubscriberViewController<ViewData: ViewDataType>: UIViewController, StoreSubscriber {
-    typealias StoreSubscriberStateType = ViewData.StateFragment
+class SubscriberViewController<ViewData: ViewDataType>: UIViewController, StateSubscriber {
+    typealias State = AppState
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        store.subscribe(self) { subscription in
-            subscription
-                .select(ViewData.fragment(of:))
-                .skipRepeats()
-        }
+        stateContainer.subscribe(self, ViewData.selections)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        store.unsubscribe(self)
+        stateContainer.unsubscribe(self)
     }
 
-    func newState(state: ViewData.StateFragment) {
+    func new(fragment: Fragment<AppState>) {
         DispatchQueue.main.async { [weak self] in
-            self?.update(with: ViewData(for: state))
+            self?.update(with: ViewData(for: fragment))
         }
     }
 
@@ -30,9 +25,7 @@ class SubscriberViewController<ViewData: ViewDataType>: UIViewController, StoreS
 }
 
 protocol ViewDataType {
-    associatedtype StateFragment: Equatable
+    static var selections: () -> [Selection<AppState>] { get }
 
-    static func fragment(of appState: AppState) -> StateFragment
-
-    init(for fragment: StateFragment)
+    init(for fragment: Fragment<AppState>)
 }

@@ -45,7 +45,7 @@ class SuccessViewController: SubscriberViewController<SuccessViewData> {
     }
 
     @objc private func didSelectRestart() {
-        store.dispatch(StartingWordAction.restart)
+        stateContainer.mutate(through: restartGame)
         dismiss(animated: true, completion: nil)
     }
 }

@@ -29,15 +29,15 @@ final class DictionaryClient {
         return dataTask
     }
 
-    struct Entry: Codable, Equatable {
+    struct Entry: Codable, Hashable {
         let word: String
         let meanings: [Meaning]
 
-        struct Meaning: Codable, Equatable {
+        struct Meaning: Codable, Hashable {
             let partOfSpeech: String
             let definitions: [Definition]
 
-            struct Definition: Codable, Equatable {
+            struct Definition: Codable, Hashable {
                 let definition: String
             }
         }

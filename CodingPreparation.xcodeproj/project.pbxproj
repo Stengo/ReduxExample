@@ -11,8 +11,7 @@
 		B809EB4D27E8646B00E0F937 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB4C27E8646B00E0F937 /* SceneDelegate.swift */; };
 		B809EB5427E8647400E0F937 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B809EB5327E8647400E0F937 /* Assets.xcassets */; };
 		B809EB5727E8647400E0F937 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B809EB5527E8647400E0F937 /* LaunchScreen.storyboard */; };
-		B809EB6027E869FA00E0F937 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B809EB5F27E869FA00E0F937 /* ReSwift */; };
-		B809EB6A27E86B6A00E0F937 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6927E86B6A00E0F937 /* Store.swift */; };
+		B809EB6A27E86B6A00E0F937 /* StateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6927E86B6A00E0F937 /* StateContainer.swift */; };
 		B809EB6C27E86B7400E0F937 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6B27E86B7400E0F937 /* AppState.swift */; };
 		B809EB7027E86DCE00E0F937 /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809EB6F27E86DCE00E0F937 /* SideEffects.swift */; };
 		B809EB7327E86E4000E0F937 /* starting_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = B809EB7227E86E4000E0F937 /* starting_words.txt */; };
@@ -37,7 +36,7 @@
 		B809EB5327E8647400E0F937 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B809EB5627E8647400E0F937 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B809EB5827E8647400E0F937 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B809EB6927E86B6A00E0F937 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		B809EB6927E86B6A00E0F937 /* StateContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateContainer.swift; sourceTree = "<group>"; };
 		B809EB6B27E86B7400E0F937 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		B809EB6F27E86DCE00E0F937 /* SideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideEffects.swift; sourceTree = "<group>"; };
 		B809EB7227E86E4000E0F937 /* starting_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = starting_words.txt; sourceTree = "<group>"; };
@@ -60,7 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B809EB6027E869FA00E0F937 /* ReSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				B8B47F342812932F00BCC03F /* Experiment.swift */,
-				B809EB6927E86B6A00E0F937 /* Store.swift */,
+				B809EB6927E86B6A00E0F937 /* StateContainer.swift */,
 				B809EB6F27E86DCE00E0F937 /* SideEffects.swift */,
 				B809EB6B27E86B7400E0F937 /* AppState.swift */,
 				B809EB8027E8763F00E0F937 /* DictionaryDefinition */,
@@ -184,7 +182,6 @@
 			);
 			name = CodingPreparation;
 			packageProductDependencies = (
-				B809EB5F27E869FA00E0F937 /* ReSwift */,
 			);
 			productName = CodingPreparation;
 			productReference = B809EB4727E8646B00E0F937 /* CodingPreparation.app */;
@@ -215,7 +212,6 @@
 			);
 			mainGroup = B809EB3E27E8646B00E0F937;
 			packageReferences = (
-				B809EB5E27E869FA00E0F937 /* XCRemoteSwiftPackageReference "ReSwift" */,
 			);
 			productRefGroup = B809EB4827E8646B00E0F937 /* Products */;
 			projectDirPath = "";
@@ -260,7 +256,7 @@
 				B809EB4D27E8646B00E0F937 /* SceneDelegate.swift in Sources */,
 				B809EB7827E86FEC00E0F937 /* WordSelectionState.swift in Sources */,
 				B809EB8427E876E200E0F937 /* DictionaryClient.swift in Sources */,
-				B809EB6A27E86B6A00E0F937 /* Store.swift in Sources */,
+				B809EB6A27E86B6A00E0F937 /* StateContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,25 +464,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		B809EB5E27E869FA00E0F937 /* XCRemoteSwiftPackageReference "ReSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReSwift/ReSwift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B809EB5F27E869FA00E0F937 /* ReSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B809EB5E27E869FA00E0F937 /* XCRemoteSwiftPackageReference "ReSwift" */;
-			productName = ReSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B809EB3F27E8646B00E0F937 /* Project object */;
 }

@@ -1,21 +1,15 @@
 import Foundation
 
 enum GameBoardViewData: ViewDataType {
-    struct StateFragment: Equatable {
-        let dictionaryDefinition: DictionaryDefinitionState
-    }
-
-    static func fragment(of appState: AppState) -> StateFragment {
-        return StateFragment(
-            dictionaryDefinition: appState.dictionaryDefinition
-        )
-    }
+    static let selections: () -> [Selection<AppState>] = {[
+        *\.dictionaryDefinition
+    ]}
 
     case loading
     case failure
     case success(String)
 
-    init(for fragment: StateFragment) {
+    init(for fragment: Fragment<AppState>) {
         switch fragment.dictionaryDefinition {
         case let .success(entries):
             self = .success(entries.asString)

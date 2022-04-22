@@ -68,6 +68,8 @@ class GameBoardViewController: SubscriberViewController<GameBoardViewData> {
         else {
             return
         }
-        store.dispatch(WordSelectionAction.select(selectedWord))
+        stateContainer.mutate { appState in
+            appState.wordSelection = .selected(selectedWord)
+        }
     }
 }

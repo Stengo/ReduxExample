@@ -1,20 +1,24 @@
-import ReSwift
 
-typealias SideEffect = (Action, @escaping DispatchFunction, @escaping () -> AppState?) -> Void
+class SideEffect: StateSubscriber {
+    typealias State = AppState
 
-private let sideEffects: [SideEffect] = [
+    private let newFragmentCallback: (Fragment<State>) -> ()
+
+    init(
+        selections: () -> [Selection<AppState>],
+        newFragmentCallback: @escaping (Fragment<State>) -> ()
+    ) {
+        self.newFragmentCallback = newFragmentCallback
+        stateContainer.subscribe(self, selections)
+    }
+
+    func new(fragment: Fragment<State>) {
+        newFragmentCallback(fragment)
+    }
+}
+
+let sideEffects: [SideEffect] = [
     startingWordSideEffect(),
     dictionaryDefinitionSideEffect(),
     viewControllerPresentationSideEffect(),
 ]
-
-let sideEffectsMiddleware: Middleware<AppState> = { dispatch, getState in
-    { originalDispatch in
-        { action in
-            originalDispatch(action)
-            for sideEffect in sideEffects {
-                sideEffect(action, dispatch, getState)
-            }
-        }
-    }
-}

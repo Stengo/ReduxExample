@@ -1,17 +1,19 @@
 import Foundation
-import ReSwift
 import UIKit
 
 func viewControllerPresentationSideEffect() -> SideEffect {
-    return { action, dispatch, getState in
-        switch action {
-        case let WordSelectionAction.select(word) where word.lowercased() == "success":
+    return SideEffect {[
+        *\.wordSelection
+    ]} newFragmentCallback: { fragment in
+        if
+            fragment.containsChanges(for: \.wordSelection),
+            case let .selected(word) = fragment.wordSelection,
+            word.lowercased() == "success"
+        {
             guard let topMostViewController = UIApplication.shared.topMostViewController else {
                 return
             }
             topMostViewController.present(SuccessViewController(), animated: true, completion: nil)
-        default:
-            return
         }
     }
 }
