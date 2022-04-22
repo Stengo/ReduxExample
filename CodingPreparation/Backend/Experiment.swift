@@ -18,7 +18,7 @@ extension StateSubscriber {
 
 class StateContainer<State: Hashable> {
     private(set) var state: State
-    private var subscriptions: [(subscriber: TypeErasedStateSubscriber, selector: Selector<State>)] = []
+    private var subscriptions: [(subscriber: TypeErasedStateSubscriber, selector: [PartialKeyPath<State>])] = []
 
     init(initialState: State) {
         state = initialState
@@ -38,8 +38,9 @@ class StateContainer<State: Hashable> {
 
     func subscribe<Subscriber: StateSubscriber>(
         _ subscriber: Subscriber,
-        selector: Selector<State>
+        fractions: [Fraction<State>]
     ) where Subscriber.State == State {
+        let selector = fractions.map(\.keyPath)
         subscriptions.append((subscriber, selector))
         subscriber.new(fragment: Fragment<State>(value: state, previousValue: state, selector: selector))
     }
@@ -51,33 +52,22 @@ class StateContainer<State: Hashable> {
     }
 }
 
-struct Selector<State>: Equatable {
-    private(set) var keyPaths: [PartialKeyPath<State>]
+struct Fraction<State> {
+    fileprivate let keyPath: PartialKeyPath<State>
 
-    private init(keyPaths: [PartialKeyPath<State>]) {
-        self.keyPaths = keyPaths
-    }
-
-    init() {
-        self.keyPaths = []
-    }
-
-    func appending<T: Hashable>(_ keyPath: KeyPath<State, T>) -> Self {
-        Selector(keyPaths: keyPaths + [keyPath])
-    }
-
-    func contains(_ keyPath: PartialKeyPath<State>) -> Bool {
-        keyPaths.contains(keyPath)
+    init<T: Hashable>(_ keyPath: KeyPath<State, T>) {
+        self.keyPath = keyPath
     }
 }
+
 
 @dynamicMemberLookup
 struct Fragment<State> {
     private let value: State
     private let previousValue: State
-    private let selector: Selector<State>
+    private let selector: [PartialKeyPath<State>]
 
-    init(value: State, previousValue: State, selector: Selector<State>) {
+    init(value: State, previousValue: State, selector: [PartialKeyPath<State>]) {
         self.value = value
         self.previousValue = previousValue
         self.selector = selector
@@ -100,7 +90,7 @@ struct Fragment<State> {
     }
 
     fileprivate func containsChanges() -> Bool {
-        for keyPath in selector.keyPaths {
+        for keyPath in selector {
             let lhsValue = previousValue[keyPath: keyPath] as! AnyHashable
             let rhsValue = value[keyPath: keyPath] as! AnyHashable
             guard lhsValue == rhsValue else {
@@ -154,9 +144,10 @@ class ApplicationSubscriber: StateSubscriber {
     init() {
         stateContainer.subscribe(
             self,
-            selector: Selector<State>()
-                .appending(\.name)
-                .appending(\.inner)
+            fractions: [
+                Fraction(\.inner),
+                Fraction(\.name),
+            ]
         )
         changeStuff()
     }
