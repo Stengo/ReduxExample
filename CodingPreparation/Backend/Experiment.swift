@@ -70,7 +70,7 @@ struct Fragment<State>: Equatable {
 
     subscript<T>(dynamicMember keyPath: KeyPath<State, T>) -> T {
         if selectedKeyPaths.contains(keyPath) == false {
-            print("WARNING: Accessing property that is not part of your observed values.")
+            print("WARNING: Accessing property that is not part of your observed values. You could be missing updates.")
         }
         return value[keyPath: keyPath]
     }
