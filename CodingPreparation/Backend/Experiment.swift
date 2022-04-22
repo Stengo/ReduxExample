@@ -38,9 +38,9 @@ class StateContainer<State: Hashable> {
 
     func subscribe<Subscriber: StateSubscriber>(
         _ subscriber: Subscriber,
-        selections: [Selection<State>]
+        _ selections: () -> [Selection<State>]
     ) where Subscriber.State == State {
-        let selector = selections.map(\.keyPath)
+        let selector = selections().map(\.keyPath)
         subscriptions.append((subscriber, selector))
         subscriber.new(fragment: Fragment<State>(value: state, previousValue: state, selector: selector))
     }
@@ -130,13 +130,10 @@ class ApplicationSubscriber: StateSubscriber {
     typealias State = ApplicationState
 
     init() {
-        stateContainer.subscribe(
-            self,
-            selections: [
-                *\.inner,
-                *\.name,
-            ]
-        )
+        stateContainer.subscribe(self) {[
+            *\.inner,
+            *\.name,
+        ]}
         changeStuff()
     }
 
