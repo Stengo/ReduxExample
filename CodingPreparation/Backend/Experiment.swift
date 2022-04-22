@@ -23,7 +23,7 @@ extension StateSubscriber {
 
 class StateContainer<State: Hashable> {
     private(set) var state: State
-    private var subscriptions: [(subscriber: TypeErasedStateSubscriber, selector: [PartialKeyPath<State>])] = []
+    private var subscriptions: [(subscriber: TypeErasedStateSubscriber, selector: Selector<State>)] = []
 
     init(initialState: State) {
         state = initialState
@@ -33,8 +33,8 @@ class StateContainer<State: Hashable> {
         let previousState = state
         mutationClosure(&state)
         subscriptions.forEach { subscription in
-            let previousFragment = Fragment<State>(value: previousState, selectedKeyPaths: subscription.selector)
-            let newFragment = Fragment<State>(value: state, selectedKeyPaths: subscription.selector)
+            let previousFragment = Fragment<State>(value: previousState, selector: subscription.selector)
+            let newFragment = Fragment<State>(value: state, selector: subscription.selector)
             guard subscription.subscriber._areEqual(newFragment, previousFragment) == false else {
                 return
             }
@@ -44,10 +44,10 @@ class StateContainer<State: Hashable> {
 
     func subscribe<Subscriber: StateSubscriber>(
         _ subscriber: Subscriber,
-        selector: [PartialKeyPath<State>]
+        selector: Selector<State>
     ) where Subscriber.State == State {
         subscriptions.append((subscriber, selector))
-        subscriber.new(fragment: Fragment<State>(value: state, selectedKeyPaths: selector))
+        subscriber.new(fragment: Fragment<State>(value: state, selector: selector))
     }
 
     func unsubscribe<Subscriber: StateSubscriber>(_ subscriber: Subscriber) {
@@ -57,29 +57,48 @@ class StateContainer<State: Hashable> {
     }
 }
 
+struct Selector<State>: Equatable {
+    private(set) var keyPaths: [PartialKeyPath<State>]
+
+    private init(keyPaths: [PartialKeyPath<State>]) {
+        self.keyPaths = keyPaths
+    }
+
+    init() {
+        self.keyPaths = []
+    }
+
+    func appending<T: Hashable>(_ keyPath: KeyPath<State, T>) -> Self {
+        Selector(keyPaths: keyPaths + [keyPath])
+    }
+
+    func contains(_ keyPath: PartialKeyPath<State>) -> Bool {
+        keyPaths.contains(keyPath)
+    }
+}
+
 @dynamicMemberLookup
 struct Fragment<State>: Equatable {
     private let value: State
-    private let selectedKeyPaths: [PartialKeyPath<State>]
+    private let selector: Selector<State>
 
-    // needs assurance that value is hashable
-    init(value: State, selectedKeyPaths: [PartialKeyPath<State>]) {
+    init(value: State, selector: Selector<State>) {
         self.value = value
-        self.selectedKeyPaths = selectedKeyPaths
+        self.selector = selector
     }
 
     subscript<T>(dynamicMember keyPath: KeyPath<State, T>) -> T {
-        if selectedKeyPaths.contains(keyPath) == false {
+        if selector.contains(keyPath) == false {
             print("WARNING: Accessing property that is not part of your observed values. You could be missing updates.")
         }
         return value[keyPath: keyPath]
     }
 
     static func == (lhs: Fragment<State>, rhs: Fragment<State>) -> Bool {
-        guard lhs.selectedKeyPaths == rhs.selectedKeyPaths else {
+        guard lhs.selector == rhs.selector else {
             return false
         }
-        for keyPath in lhs.selectedKeyPaths {
+        for keyPath in lhs.selector.keyPaths {
             let lhsValue = lhs.value[keyPath: keyPath] as! AnyHashable
             let rhsValue = rhs.value[keyPath: keyPath] as! AnyHashable
             guard lhsValue == rhsValue else {
@@ -118,10 +137,12 @@ class ApplicationSubscriber: StateSubscriber {
     typealias State = ApplicationState
 
     init() {
-        stateContainer.subscribe(self, selector: [
-            \.name,
-            \.inner,
-        ])
+        stateContainer.subscribe(
+            self,
+            selector: Selector<State>()
+                .appending(\.name)
+                .appending(\.inner)
+        )
         changeStuff()
     }
 
