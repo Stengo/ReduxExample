@@ -105,21 +105,9 @@ struct ApplicationState: Equatable, Hashable {
     var number: Int
     var isTheCase: Bool
     var inner: InnerStruct
-    var nonHashable: NonHashable
 
     struct InnerStruct: Equatable, Hashable {
         var description: String
-    }
-
-    struct NonHashable: Equatable {
-        var bla: String
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
-        hasher.combine(number)
-        hasher.combine(isTheCase)
-        hasher.combine(inner)
     }
 }
 
@@ -128,8 +116,7 @@ let stateContainer = StateContainer(
         name: "Initial Name",
         number: 1,
         isTheCase: true,
-        inner: ApplicationState.InnerStruct(description: "Initial description"),
-        nonHashable: ApplicationState.NonHashable(bla: "What")
+        inner: ApplicationState.InnerStruct(description: "Initial description")
     )
 )
 
@@ -150,9 +137,7 @@ class ApplicationSubscriber: StateSubscriber {
     func new(fragment: Fragment<State>) {
         print(fragment.inner.description)
         print(fragment.isTheCase)
-        print("was \(fragment.previousValue(of: \.isTheCase))")
         print("has change: \(fragment.containsChanges(for: \.isTheCase))")
-        print(fragment.nonHashable.bla)
     }
 
     func changeStuff() {
